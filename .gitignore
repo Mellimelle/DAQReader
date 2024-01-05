@@ -1,0 +1,10 @@
+# Output files
+*.o
+
+# Root files
+*.pcm
+HitDict.cc
+EventDict.cc
+
+# Vscode directory
+.vscode
