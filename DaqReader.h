@@ -65,6 +65,10 @@ public:
     std::vector<int> GetCH2() { return m_ADC00_CH2; }
     int GetCurrentEvent() { return m_currentEvent; }
 
+    // Cancellazione funzioni per ottimizzazione
+    DaqReader(const DaqReader&) = delete;
+    DaqReader& operator=(const DaqReader&) = delete;
+
 private:
     // Output canali
     std::vector<int> m_ADC00_CH0{};

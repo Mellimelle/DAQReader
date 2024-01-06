@@ -214,7 +214,7 @@ bool DaqReader::processNextEvent()
 	// Successivamente restituisce la dimensione dei dati
 	const int dataSize{ checkFirstHeader(firstHeader) };
 
-	processEventData(dataSize);
+	processEventData(static_cast<std::size_t>(dataSize));
 	m_currentEvent++;
 	return true;
 }
@@ -352,7 +352,7 @@ int DaqReader::generateRootFile()
 		}
 
 		// Devo controllare di avere almeno due picchi per poter definire timeDifference
-		int timeDifference{ sampleToNs(static_cast<double>(peaks.peakStart[1] - peaks.peakEnd[0])) };
+		int timeDifference{ sampleToNs(static_cast<int>(peaks.peakStart[1] - peaks.peakEnd[0])) };
 
 		// Trovo l'area del muone così posso vedere se supera la soglia
 		double muonIntegral{ integrateSpectrum(peaks.peakStart[0], peaks.peakEnd[0], data) };
@@ -376,7 +376,7 @@ int DaqReader::generateRootFile()
 			TGraph dataPoints;
 			for (std::size_t i{ 0 }; i < data.size(); ++i)
 			{
-				dataPoints.AddPoint(sampleToNs(i), countToV(data[i]));
+				dataPoints.AddPoint(sampleToNs(static_cast<int>(i)), countToV(data[i]));
 			}
 			finalGraph.Add(&dataPoints);
 
@@ -397,9 +397,9 @@ int DaqReader::generateRootFile()
 
 			for (std::size_t i{ 0 }; i < peaks.amount; i++)
 			{
-				startPeakPoints.AddPoint(sampleToNs(peaks.peakStart[i]), countToV(data[peaks.peakStart[i]]));
-				endPeakPoints.AddPoint(sampleToNs(peaks.peakEnd[i]), countToV(data[peaks.peakEnd[i]]));
-				minimumPeakPoints.AddPoint(sampleToNs(peaks.peakMinimum[i]), countToV(data[peaks.peakMinimum[i]]));
+				startPeakPoints.AddPoint(sampleToNs(static_cast<int>(peaks.peakStart[i])), countToV(data[peaks.peakStart[i]]));
+				endPeakPoints.AddPoint(sampleToNs(static_cast<int>(peaks.peakEnd[i])), countToV(data[peaks.peakEnd[i]]));
+				minimumPeakPoints.AddPoint(sampleToNs(static_cast<int>(peaks.peakMinimum[i])), countToV(data[peaks.peakMinimum[i]]));
 
 				finalGraph.Add(&startPeakPoints);
 				finalGraph.Add(&endPeakPoints);
