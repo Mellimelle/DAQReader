@@ -116,7 +116,6 @@ punto di minimo e registrandone la posizione.
 4. Risalita del segnale: Dopo il minimo, la derivata diventa positiva in
 quanto il segnale risale.
 5. Fine del segnale: Identifica la fine del segnale quando la derivata
-diventa nuovamente negativa, salvando la posizione del sample corri-
-spondente.
+diventa nuovamente negativa, salvando la posizione del sample corrispondente.
 6. Reiterazione: L’algoritmo continua la ricerca dei picchi, eseguendo
 nuovamente i passaggi descritti finché non si arriva alla fine dei dati.
